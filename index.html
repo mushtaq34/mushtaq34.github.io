@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<title>WebRTC: Still photo capture demo</title>
+	<meta charset='utf-8'>
+	</head>
+<body>
+<input type="file" accept="image/*" capture="environment" id="file-input">
+<div><img id="file-image" height=150 width=150></div>
+<button onclick="getLocation()">Get location</button>
+
+<p id="demo"></p>
+<script>
+const fileInput = document.getElementById('file-input');
+const image = document.getElementById('file-image');
+  fileInput.addEventListener('change', (e) => {
+image.src = URL.createObjectURL(e.target.files[0])
+});
+var x = document.getElementById("demo");
+function getLocation() {
+if (navigator.geolocation) {
+	console.log("its geo");
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+      } else {
+         x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+</body>
+</html>
